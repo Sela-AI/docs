@@ -3,7 +3,8 @@
   "name": "Sela AI",
   "logo": {
     "dark": "/logo/sela_logo_light.svg",
-    "light": "/logo/sela_logo_light.svg"
+    "light": "/logo/sela_logo_light.svg",
+    "href": "https://trysela.com"
   },
   "favicon": "/favicon.svg",
   "colors": {
