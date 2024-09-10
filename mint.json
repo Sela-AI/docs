@@ -40,8 +40,8 @@
     {
       "group": "Get Started",
       "pages": [
-        "features",
-        "quickstart"
+        "quickstart",
+        "features"
       ]
     },
     {
