@@ -1,0 +1,447 @@
+openapi: 3.0.3
+info:
+  title: Sela API
+  version: 1.0.0
+  description: Voice AI agents with superhuman conversion rates
+paths:
+  /api/leads/:
+    get:
+      operationId: leads_list
+      description: Lists all leads.
+      summary: List Leads
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Leads
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPartialLeadList'
+          description: ''
+    post:
+      operationId: leads_create
+      description: Creates a lead. Will also initiate the call schedule, if outbound
+        calling is configured.
+      summary: Create a Lead
+      tags:
+      - Leads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialLead'
+          description: ''
+  /api/leads/{id}/:
+    get:
+      operationId: leads_retrieve
+      description: Retrieves a lead.
+      summary: Retrieve a Lead
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this lead.
+        required: true
+      tags:
+      - Leads
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialLead'
+          description: ''
+    patch:
+      operationId: leads_partial_update
+      description: Updates a lead, e.g. if the status changes.
+      summary: Update a Lead
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this lead.
+        required: true
+      tags:
+      - Leads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPartialLead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPartialLead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPartialLead'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialLead'
+          description: ''
+  /api/leads/update/:
+    put:
+      operationId: leads_update_update
+      description: Updates a lead a using the phone number and the email to find a
+        matching lead.
+      summary: Update a Lead with Phone / Email Match
+      tags:
+      - Leads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PartialLead'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialLead'
+          description: ''
+  /api/webhooks/:
+    get:
+      operationId: webhooks_list
+      description: List all webhook subscriptions.
+      summary: List Webhooks
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Webhooks
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWebhookList'
+          description: ''
+    post:
+      operationId: webhooks_create
+      description: Creates a webhook subscription.
+      summary: Create a Webhook
+      tags:
+      - Webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: ''
+  /api/webhooks/{id}/:
+    get:
+      operationId: webhooks_retrieve
+      description: Retrieve a webhook subscription.
+      summary: Retrieve a Webhook
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this webhook.
+        required: true
+      tags:
+      - Webhooks
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: ''
+    delete:
+      operationId: webhooks_destroy
+      description: Deletes a webhook subscription.
+      summary: Delete a Webhook
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this webhook.
+        required: true
+      tags:
+      - Webhooks
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/webhooks/unsubscribe/:
+    delete:
+      operationId: webhooks_unsubscribe_destroy
+      description: Deletes a webhook subscription given a url.
+      summary: Delete a Webhook by URL
+      parameters:
+      - in: query
+        name: url
+        schema:
+          type: string
+        description: The URL of the webhook to delete.
+      tags:
+      - Webhooks
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    BlankEnum:
+      enum:
+      - ''
+    NullEnum:
+      enum:
+      - null
+    PaginatedPartialLeadList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialLead'
+    PaginatedWebhookList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+    PartialLead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 128
+        metadata:
+          nullable: true
+        modified_time:
+          type: string
+          format: date-time
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        status_reason:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/StatusReasonEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        lead_type:
+          type: integer
+          nullable: true
+      required:
+      - created_time
+      - id
+      - modified_time
+      - phone_number
+    PatchedPartialLead:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 128
+        metadata:
+          nullable: true
+        modified_time:
+          type: string
+          format: date-time
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        status_reason:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/StatusReasonEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        lead_type:
+          type: integer
+          nullable: true
+    StatusEnum:
+      enum:
+      - UNKNOWN
+      - NEW
+      - OPEN
+      - CLOSED
+      - CLOSED_INCOMPLETE
+      - LOST
+      - SCHEDULE_COMPLETED
+      type: string
+      description: |-
+        * `UNKNOWN` - Unknown
+        * `NEW` - New
+        * `OPEN` - Open
+        * `CLOSED` - Closed
+        * `CLOSED_INCOMPLETE` - Closed incomplete
+        * `LOST` - Lost
+        * `SCHEDULE_COMPLETED` - Schedule completed
+    StatusReasonEnum:
+      enum:
+      - UNKNOWN
+      - WEBHOOK
+      - MANUAL
+      - CHAT
+      type: string
+      description: |-
+        * `UNKNOWN` - Unknown
+        * `WEBHOOK` - Webhook
+        * `MANUAL` - Manual
+        * `CHAT` - Chat
+    TriggerEnum:
+      enum:
+      - LEAD_CLOSED
+      - LEAD_CLOSED_INCOMPLETE
+      - LEAD_LOST
+      - LEAD_SCHEDULE_COMPLETED
+      - CALL_COMPLETE
+      type: string
+      description: |-
+        * `LEAD_CLOSED` - Lead Closed
+        * `LEAD_CLOSED_INCOMPLETE` - Lead Closed Incomplete
+        * `LEAD_LOST` - Lead Lost
+        * `LEAD_SCHEDULE_COMPLETED` - Lead Schedule Completed
+        * `CALL_COMPLETE` - Call Complete
+    Webhook:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          maxLength: 255
+        trigger:
+          $ref: '#/components/schemas/TriggerEnum'
+      required:
+      - url
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

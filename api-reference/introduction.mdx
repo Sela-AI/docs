@@ -1,14 +1,17 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Welcome to Sela API documentation'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  The easiest way to use our API is via our [Zapier Integration](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/). However, if you need full transparency and increased flexibility, you can use our API directly.
 </Note>
 
 ## Welcome
+
+Sela API is designed to receive leads, perform one or more phone calls, and to send updates back to you via webhooks.
+
+Before you can do this, you need to obtain an API token. Please chat with Sela by calling [(337) 561-1412](tel:+13375611412)
 
 There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
 
@@ -22,12 +25,9 @@ There are two ways to build API documentation: [OpenAPI](https://mintlify.com/do
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints are authenticated using a Token in the http request header.
+If you are using our [Zapier App](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/), the prefix "Token " will be included automatically, so you need to copy and paste only your 40 character token.
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{"Authorization": "Token abc123..."}
 ```
