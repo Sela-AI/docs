@@ -1,10 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Sela AI",
+  "name": "Sela API",
   "logo": {
     "dark": "/logo/sela_logo_light.svg",
-    "light": "/logo/sela_logo_light.svg",
-    "href": "https://trysela.com"
+    "light": "/logo/sela_logo_light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -20,11 +19,15 @@
     {
       "name": "Support",
       "url": "mailto:support@trysela.com"
+    },
+    {
+      "name": "Homepage",
+      "url": "https://trysela.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "To the App",
+    "url": "https://app.trysela.com"
   },
   "tabs": [
     {
@@ -33,55 +36,18 @@
       "openapi": "/Sela API.yaml"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "features",
+        "quickstart"
       ]
     },
     {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
       ]
     }
   ],

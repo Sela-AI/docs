@@ -1,33 +1,33 @@
 ---
 title: 'Introduction'
-description: 'Welcome to Sela API documentation'
+description: 'Welcome to Sela API Reference'
 ---
 
 <Note>
-  The easiest way to use our API is via our [Zapier Integration](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/). However, if you need full transparency and increased flexibility, you can use our API directly.
+  The easiest way to use our API is via our [Zapier Integration](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/). If you need full transparency and increased flexibility, you can use our API directly.
 </Note>
 
-## Welcome
+## Getting started
 
-Sela API is designed to receive leads, perform one or more phone calls, and to send updates back to you via webhooks.
+Sela API is designed to receive leads, perform phone calls, and send updates back to you via webhooks.
 
-Before you can do this, you need to obtain an API token. Please chat with Sela by calling [(337) 561-1412](tel:+13375611412)
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+You need to obtain a Token to use this API. Call Sela at [(337) 561-1412](tel:+13375611412) or chat with her at https://trysela.com to schedule a meeting with one of our AI experts. They will onboard you and set you up with an API Token.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Call Sela to get started"
+  icon="phone"
+  href="tel:+13375611412"
 >
-  View the OpenAPI specification file
+  Call our AI assistant at (337) 561-1412 to schedule an onboarding meeting.
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using a Token in the http request header.
-If you are using our [Zapier App](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/), the prefix "Token " will be included automatically, so you need to copy and paste only your 40 character token.
+All of our API endpoints are authenticated using an Authorization token in the request header.
 
 ```json
 {"Authorization": "Token abc123..."}
 ```
+
+If you are using our [Zapier App](https://zapier.com/developer/public-invite/210854/814e5d3830201d32af913e6b9e63f1c9/), the "Token " prefix will be added automatically. Please do not share your Token with anyone outside your organization.
+
